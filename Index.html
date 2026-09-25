@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deriv Bot — Verification Build</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#07111f;
+  color:#eef5ff;
+  font-family:system-ui,-apple-system,Arial,sans-serif;
+}
+
+main{
+  width:min(100% - 24px,1000px);
+  margin:auto;
+  padding:20px 0 40px;
+}
+
+header{
+  margin-bottom:18px;
+}
+
+h1{
+  margin:0;
+  font-size:26px;
+}
+
+.subtitle{
+  color:#9fb1c9;
+  margin-top:5px;
+}
+
+.card{
+  background:#101c2e;
+  border:1px solid #263750;
+  border-radius:16px;
+  padding:18px;
+  margin:14px 0;
+}
+
+.status{
+  font-size:22px;
+  font-weight:800;
+  color:#37da7d;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:16px;
+}
+
+button{
+  padding:12px 18px;
+  border:1px solid #405674;
+  border-radius:10px;
+  background:#173d64;
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.stop{
+  background:#632c38;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+}
+
+.metric{
+  background:#0a1627;
+  border:1px solid #20324a;
+  border-radius:12px;
+  padding:14px;
+}
+
+.metric small{
+  color:#a9bad0;
+}
+
+.metric h2{
+  margin:7px 0 0;
+}
+
+.good{color:#37da7d}
+.warning{color:#ffc857}
+
+.row{
+  padding:8px 0;
+  border-bottom:1px solid #263750;
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+footer{
+  color:#8498b3;
+  font-size:12px;
+  text-align:center;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<header>
+  <h1>Deriv Trading Dashboard</h1>
+  <div class="subtitle">Stage 1 — Interface Verification</div>
+</header>
+
+<section class="card">
+  <div class="status">✓ Dashboard loaded correctly</div>
+
+  <p>
+    This build verifies the dashboard interface only.
+    Real-money execution is intentionally disabled until the later
+    connection and trading stages are tested.
+  </p>
+
+  <div class="controls">
+    <button onclick="setState('RUNNING')">Start UI Test</button>
+    <button class="stop" onclick="setState('STOPPED')">Stop</button>
+    <button onclick="location.reload()">Refresh</button>
+  </div>
+
+  <p>
+    Dashboard state:
+    <strong id="state">STOPPED</strong>
+  </p>
+</section>
+
+<section class="grid">
+
+  <div class="metric">
+    <small>Scanner cycle</small>
+    <h2>3 seconds</h2>
+  </div>
+
+  <div class="metric">
+    <small>Signal gate</small>
+    <h2>85 / 100</h2>
+  </div>
+
+  <div class="metric">
+    <small>Minimum target</small>
+    <h2>15 sec+</h2>
+  </div>
+
+  <div class="metric">
+    <small>Real trading</small>
+    <h2 class="warning">DISABLED</h2>
+  </div>
+
+</section>
+
+<section class="card">
+  <h2>Signal Detector</h2>
+
+  <div class="row">Trend — maximum <strong>25</strong></div>
+  <div class="row">Momentum — maximum <strong>20</strong></div>
+  <div class="row">Confirmation — maximum <strong>20</strong></div>
+  <div class="row">Volatility — maximum <strong>15</strong></div>
+  <div class="row">Price / tick consistency — maximum <strong>10</strong></div>
+  <div class="row">Data + contract quality — maximum <strong>10</strong></div>
+
+  <p><strong>Total maximum: 100 points</strong></p>
+</section>
+
+<section class="card">
+  <h2>Verification Progress</h2>
+
+  <div class="row">
+    Stage 1 — Dashboard:
+    <strong class="good">READY TO TEST</strong>
+  </div>
+
+  <div class="row">
+    Stage 2 — Live Deriv market feed:
+    <strong>NOT YET VERIFIED</strong>
+  </div>
+
+  <div class="row">
+    Stage 3 — OAuth / account connection:
+    <strong>NOT YET VERIFIED</strong>
+  </div>
+
+  <div class="row">
+    Stage 4 — Contract / proposal validation:
+    <strong>NOT YET VERIFIED</strong>
+  </div>
+
+  <div class="row">
+    Stage 5 — Real-order lifecycle:
+    <strong>NOT VERIFIED — DISABLED</strong>
+  </div>
+</section>
+
+<footer>
+  Verification build — no real-money orders can be placed from this version.
+</footer>
+
+</main>
+
+<script>
+function setState(value){
+  document.getElementById("state").textContent=value;
+}
+</script>
+
+</body>
+</html>
